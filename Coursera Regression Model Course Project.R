@@ -1,3 +1,17 @@
-> library(mtcars)
-> data(mtcars)
-> str(mtcars)
+library(mtcars)
+data(mtcars)
+str(mtcars)
+
+#transform some of the variables into factor form
+mtcars$cyl  <- factor(mtcars$cyl)
+mtcars$vs   <- factor(mtcars$vs)
+mtcars$am   <- factor(mtcars$am,labels=c("Auto","Man"))
+mtcars$gear <- factor(mtcars$gear)
+mtcars$carb <- factor(mtcars$carb)
+
+mpgAuto <- subset(mtcars, mtcars$am == "Auto", select = c(mpg))
+mpgMan <- subset(mtcars, mtcars$am == "Man", select = c(mpg))
+t.test(mpgAuto$mpg, mpgMan$mpg)
+pairs(mpg ~ ., data = mtcars)
+
+

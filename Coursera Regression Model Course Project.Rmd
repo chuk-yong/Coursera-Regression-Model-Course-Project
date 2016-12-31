@@ -9,17 +9,46 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+## Coursera Regression Model Course Project
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+You work for Motor Trend, a magazine about the automobile industry. Looking at a data set of a collection of cars, they are interested in exploring the relationship between a set of variables and miles per gallon (MPG) (outcome). They are particularly interested in the following two questions:
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+???Is an automatic or manual transmission better for MPG???
+"Quantify the MPG difference between automatic and manual transmissions"
 
-```{r cars}
-summary(cars)
+#Start
+Load dataset and understand the contents
+```{r message=FALSE}
+library(mtcars)
+data(mtcars)
+str(mtcars)
 ```
+Transform some variables into factor form
+```{r message=FALSE}
+mtcars$cyl  <- factor(mtcars$cyl)
+mtcars$vs   <- factor(mtcars$vs)
+mtcars$am   <- factor(mtcars$am,labels=c("Auto","Man"))
+mtcars$gear <- factor(mtcars$gear)
+mtcars$carb <- factor(mtcars$carb)
+```
+## Exploratory Data Analysis
+To answer the first question - ???Is an automatic or manual transmission better for MPG???, let's look at the sample and determine the averages and whether the value is signigicant. 
 
-## Including Plots
+```{r}
+mpgAuto <- subset(mtcars, mtcars$am == "Auto", select = c(mpg))
+mpgMan <- subset(mtcars, mtcars$am == "Man", select = c(mpg))
+t.test(mpgAuto$mpg, mpgMan$mpg)
+```
+We can see that:
+1. Average mpg for Automatic transmission is 17.15.
+2. Average mpg for Manual transmission is 24,39.
+3. p-value = 0.001374
+
+Clearly, Manual transmission has a much better mpg and the test is significant (p-value < 0.01).  
+
+
+First, we explore the datasets by plotting mpg against other variables to see if there is a corelation.  Script and plots can be found in Appendix A.
+From the plots, we can 
 
 You can also embed plots, for example:
 
