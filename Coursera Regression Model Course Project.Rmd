@@ -46,6 +46,22 @@ We can see that:
 
 Clearly, Manual transmission has a much better mpg and the test is significant (p-value < 0.01).  
 
+We can now proceed with regression modelling to see how well the fit is.  
+
+```{r}
+fit <- lm(mpg ~ am, data = mtcars)
+summary(fit)
+```
+As confimed by the coefficients - Manual transmission is 7.245mpg better than Autotransmission.  p-value is much less than 0.01 and so they are significant.  However, looking at R-squared and Adjusted R-squared, the value of 0.36 and 0.33 tells us that there is room for improvement.
+
+In order to make a better decision on what other variables could possible impact mpg, we made a pairplot.  Results are shown in Appendix 1.
+
+From the pair plot, we can see that there are some correlation between cyl - cylinder, disp - displacement, hp - horse power and wt - weight. 
+
+We will git in the variables one by one and see if the introduction improves on our original fit.
+
+
+
 
 First, we explore the datasets by plotting mpg against other variables to see if there is a corelation.  Script and plots can be found in Appendix A.
 From the plots, we can 
