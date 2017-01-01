@@ -1,4 +1,4 @@
-library(mtcars)
+
 data(mtcars)
 str(mtcars)
 
@@ -21,5 +21,12 @@ fit5 <- lm(mpg ~ am+cyl+disp+hp+wt, data = mtcars)
 
 summary(fit)
 pairs(mpg ~ ., data = mtcars)
+
+#library(psych) 
+#pairs.panels(mtcars)
+# Diagnostic plots
+par(mfrow = c(2,2))
+plot(fit5)
+
 
 

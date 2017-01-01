@@ -13,13 +13,12 @@ knitr::opts_chunk$set(echo = TRUE)
 
 You work for Motor Trend, a magazine about the automobile industry. Looking at a data set of a collection of cars, they are interested in exploring the relationship between a set of variables and miles per gallon (MPG) (outcome). They are particularly interested in the following two questions:
 
-???Is an automatic or manual transmission better for MPG???
+“Is an automatic or manual transmission better for MPG”
 "Quantify the MPG difference between automatic and manual transmissions"
 
 #Start
 Load dataset and understand the contents
 ```{r message=FALSE}
-library(mtcars)
 data(mtcars)
 str(mtcars)
 ```
@@ -32,7 +31,7 @@ mtcars$gear <- factor(mtcars$gear)
 mtcars$carb <- factor(mtcars$carb)
 ```
 ## Exploratory Data Analysis
-To answer the first question - ???Is an automatic or manual transmission better for MPG???, let's look at the sample and determine the averages and whether the value is signigicant. 
+To answer the first question - “Is an automatic or manual transmission better for MPG”, let's look at the sample and determine the averages and whether the value is signigicant. 
 
 ```{r}
 mpgAuto <- subset(mtcars, mtcars$am == "Auto", select = c(mpg))
@@ -54,22 +53,16 @@ summary(fit)
 ```
 As confimed by the coefficients - Manual transmission is 7.245mpg better than Autotransmission.  p-value is much less than 0.01 and so they are significant.  However, looking at R-squared and Adjusted R-squared, the value of 0.36 and 0.33 tells us that there is room for improvement.
 
-In order to make a better decision on what other variables could possible impact mpg, we made a pairplot.  Results are shown in Appendix 1.
+In order to make a better decision on what other variables could possible impact mpg, we made a pairplot.  Results are shown in Appendix.
 
 From the pair plot, we can see that there are some correlation between cyl - cylinder, disp - displacement, hp - horse power and wt - weight. 
 
-We will git in the variables one by one and see if the introduction improves on our original fit.
+We will fit in the variables and see if the introduction improves on our original fit.
 
+##Appendix
 
-
-
-First, we explore the datasets by plotting mpg against other variables to see if there is a corelation.  Script and plots can be found in Appendix A.
-From the plots, we can 
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+#Pair Plots
+This is a pair plot showing the relationship between all the variables.
+```{R}
+pairs(mpg ~ ., data = mtcars)
 ```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
